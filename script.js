@@ -106,13 +106,21 @@ form.addEventListener('submit', (event) => {
 });
 
 document.getElementById('filterType').addEventListener('change', filterTransactions);
+document.getElementById('minAmount').addEventListener('input', filterTransactions); 
+document.getElementById('maxAmount').addEventListener('input', filterTransactions);
 
 function filterTransactions() {
     const filterType = document.getElementById('filterType').value;
+    const minAmount = parseFloat(document.getElementById('minAmount').value) || 0; 
+    const maxAmount = parseFloat(document.getElementById('maxAmount').value) || Infinity; 
 
-    const filteredTransactions = transactions.filter(transaction =>  //creates new arr that include the filtered transactions
-        filterType === 'all' || transaction.type === filterType
-    );
+
+    const filteredTransactions = transactions.filter(transaction => { //creates new arr that include the filtered transactions
+        const amountCondition = transaction.amount >= minAmount && transaction.amount <= maxAmount;
+        const typeCondition = filterType === 'all' || transaction.type === filterType;
+
+        return amountCondition && typeCondition;
+    });
 
     updateTransactionList(filteredTransactions); 
 }
