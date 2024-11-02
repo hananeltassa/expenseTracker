@@ -108,21 +108,33 @@ form.addEventListener('submit', (event) => {
 document.getElementById('filterType').addEventListener('change', filterTransactions);
 document.getElementById('minAmount').addEventListener('input', filterTransactions); 
 document.getElementById('maxAmount').addEventListener('input', filterTransactions);
+document.getElementById('descriptionFilter').addEventListener('input', filterTransactions);
 
 function filterTransactions() {
     const filterType = document.getElementById('filterType').value;
     const minAmount = parseFloat(document.getElementById('minAmount').value) || 0; 
-    const maxAmount = parseFloat(document.getElementById('maxAmount').value) || Infinity; 
+    const maxAmount = parseFloat(document.getElementById('maxAmount').value) || Infinity;
+    const descriptionFilter = document.getElementById('descriptionFilter').value.toLowerCase(); 
 
 
     const filteredTransactions = transactions.filter(transaction => { //creates new arr that include the filtered transactions
         const amountCondition = transaction.amount >= minAmount && transaction.amount <= maxAmount;
         const typeCondition = filterType === 'all' || transaction.type === filterType;
+        const descriptionCondition = transaction.description.toLowerCase().includes(descriptionFilter); 
 
-        return amountCondition && typeCondition;
+        return amountCondition && typeCondition && descriptionCondition; 
     });
 
     updateTransactionList(filteredTransactions); 
+}
+
+function resetFilters() {
+    document.getElementById('descriptionFilter').value = '';
+    document.getElementById('minAmount').value = '';
+    document.getElementById('maxAmount').value = '';
+    document.getElementById('filterType').value = 'all';
+
+    updateTransactionList(transactions); 
 }
 
 totalAmount.textContent = `Total Amount: $0.00`; 

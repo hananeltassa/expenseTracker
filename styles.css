@@ -47,6 +47,7 @@ input, select {
     border: 1px solid #bdc3c7; 
     border-radius: 5px; 
     font-size: 1rem; 
+    margin: 5px 0px; 
 }
 
 input:focus, select:focus {

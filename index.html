@@ -40,6 +40,12 @@
         </section>
         <section id="transaction-summary-container">
             <h2>Transaction Summary</h2>
+            <div>
+                <label for="descriptionFilter">Filter by Description</label>
+                <input type="text" id="descriptionFilter" placeholder="Enter description" oninput="filterTransactions()">
+            </div>
+            
+
             <select id="filterType" onchange="filterTransactions()">
                 <option value="all">All</option>
                 <option value="income">Incomes</option>
@@ -52,6 +58,8 @@
                 <label for="maxAmount">Max Amount</label>
                 <input type="number" id="maxAmount" placeholder="Enter maximum amount">
             </div>
+            <button id="resetFilters" onclick="resetFilters()">Reset Filters</button>
+
 
 
             <div id="transaction-container">
