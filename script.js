@@ -38,12 +38,20 @@ function updateTransactionList() {
         li.setAttribute('data-type', transaction.type);
         li.textContent = `${transaction.description} - ${transaction.type} $${transaction.amount} on ${transaction.date}`;
         
+        //Edit button
+        const editButton = document.createElement('button');
+        editButton.textContent='Edit';
+        editButton.style.marginLeft = '10px';
+        editButton.onclick = () => editTransaction(index);
+
+
         // delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.style.marginLeft = '10px'; 
         deleteButton.onclick = () => deleteTransaction(index);
         
+        li.appendChild(editButton)
         li.appendChild(deleteButton);
         transactionsList.appendChild(li);
 
@@ -53,10 +61,39 @@ function updateTransactionList() {
     totalAmount.textContent = `Total Amount: $${total.toFixed(2)}`; 
 }
 
+function editTransaction(index){
+    const transaction = transactions[index];
+    
+    document.getElementById('description').value = transaction.description;
+    document.getElementById('amount').value = transaction.amount;
+    document.getElementById('date').value = transaction.date;
+    document.getElementById('type').value = transaction.type;
+
+    form.dataset.editIndex = index; 
+}
+
 function deleteTransaction(index) {
     transactions.splice(index, 1); 
     updateTransactionList(); 
 }
 
-form.addEventListener('submit', addTransaction);
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); //prevent from submission
+    const editIndex = form.dataset.editIndex;
 
+    if (editIndex) {
+        transactions[Number(editIndex)] = { 
+            description: document.getElementById('description').value,
+            amount: parseFloat(document.getElementById('amount').value),
+            date: document.getElementById('date').value,
+            type: document.getElementById('type').value
+        };
+        form.reset();
+    } else {
+        addTransaction(event);
+    }
+
+    updateTransactionList();
+});
+
+totalAmount.textContent = `Total Amount: $0.00`; 
