@@ -19,7 +19,6 @@ function addTransaction(event) {
         return;
     }
 
-
     const transaction = { description, amount, date, type };
  
     console.log(transaction)
@@ -34,16 +33,29 @@ function updateTransactionList() {
     transactionsList.innerHTML = ''; 
     let total = 0;
 
-    transactions.forEach(transaction => {
+    transactions.forEach((transaction, index) => { //getiing the index
         const li = document.createElement('li');
         li.setAttribute('data-type', transaction.type);
         li.textContent = `${transaction.description} - ${transaction.type} $${transaction.amount} on ${transaction.date}`;
+        
+        // delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.style.marginLeft = '10px'; 
+        deleteButton.onclick = () => deleteTransaction(index);
+        
+        li.appendChild(deleteButton);
         transactionsList.appendChild(li);
 
         total += (transaction.type === 'income' ? transaction.amount : -transaction.amount);
     });
     
     totalAmount.textContent = `Total Amount: $${total.toFixed(2)}`; 
+}
+
+function deleteTransaction(index) {
+    transactions.splice(index, 1); 
+    updateTransactionList(); 
 }
 
 form.addEventListener('submit', addTransaction);
