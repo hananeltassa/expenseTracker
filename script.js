@@ -1,12 +1,6 @@
 const form = document.getElementById('form');
+const transactionsList = document.getElementById('transactionsList'); 
 
-// to append the new trans
-const transactionsList = document.createElement('ul');
-document.body.appendChild(transactionsList);
-
-const totalAmount = document.createElement('h2');
-totalAmount.id = 'total-amount';
-document.body.appendChild(totalAmount);
 
 let transactions = [];
 function addTransaction(event) {

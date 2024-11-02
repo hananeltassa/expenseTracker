@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
     <header>
         <h1>Expense Tracker</h1>
     </header>
     <main>
-        <section>
+        <div class="container">
+        <section id="add-transaction-container">
             <h2>Add Transaction</h2>
             <form id="form">
                 <div class="form-gp">
@@ -36,6 +38,14 @@
                 <button type="submit">Add Transaction</button>
             </form>
         </section>
+        <section id="transaction-summary-container">
+            <h2>Transaction Summary</h2>
+            <div id="transaction-container">
+                <ul id="transactionsList"></ul> <!-- UL for transactions -->
+            </div>
+            <h2 id="total-amount">Total Amount: $0</h2>
+        </section>
+    </div>
     </main>
     <script src="script.js"></script>
 </body>
