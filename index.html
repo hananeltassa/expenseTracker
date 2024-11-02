@@ -58,9 +58,15 @@
                 <label for="maxAmount">Max Amount</label>
                 <input type="number" id="maxAmount" placeholder="Enter maximum amount">
             </div>
+
+            <div>
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" oninput="filterTransactions()">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" oninput="filterTransactions()">
+            </div>
+
             <button id="resetFilters" onclick="resetFilters()">Reset Filters</button>
-
-
 
             <div id="transaction-container">
                 <ul id="transactionsList"></ul> <!-- for transactions -->

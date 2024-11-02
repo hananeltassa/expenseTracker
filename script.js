@@ -109,6 +109,8 @@ document.getElementById('filterType').addEventListener('change', filterTransacti
 document.getElementById('minAmount').addEventListener('input', filterTransactions); 
 document.getElementById('maxAmount').addEventListener('input', filterTransactions);
 document.getElementById('descriptionFilter').addEventListener('input', filterTransactions);
+document.getElementById('startDate').addEventListener('input', filterTransactions);
+document.getElementById('endDate').addEventListener('input', filterTransactions);
 
 function filterTransactions() {
     const filterType = document.getElementById('filterType').value;
@@ -116,13 +118,26 @@ function filterTransactions() {
     const maxAmount = parseFloat(document.getElementById('maxAmount').value) || Infinity;
     const descriptionFilter = document.getElementById('descriptionFilter').value.toLowerCase(); 
 
+    // Get the start and end dates
+    const startDateInput = document.getElementById('startDate').value;
+    const endDateInput = document.getElementById('endDate').value;
+
+    // Initialize the start and end dates
+    const startDate = startDateInput ? new Date(startDateInput) : null;
+    const endDate = endDateInput ? new Date(endDateInput) : new Date('9999-12-31');
+
 
     const filteredTransactions = transactions.filter(transaction => { //creates new arr that include the filtered transactions
+        const transactionDate = new Date(transaction.date);
+        
         const amountCondition = transaction.amount >= minAmount && transaction.amount <= maxAmount;
         const typeCondition = filterType === 'all' || transaction.type === filterType;
         const descriptionCondition = transaction.description.toLowerCase().includes(descriptionFilter); 
-
-        return amountCondition && typeCondition && descriptionCondition; 
+        
+        // Check if the transaction date falls within the specified range
+        const dateCondition = (!startDate || transactionDate >= startDate) && transactionDate <= endDate;
+        
+        return amountCondition && typeCondition && descriptionCondition && dateCondition;
     });
 
     updateTransactionList(filteredTransactions); 
@@ -132,6 +147,8 @@ function resetFilters() {
     document.getElementById('descriptionFilter').value = '';
     document.getElementById('minAmount').value = '';
     document.getElementById('maxAmount').value = '';
+    document.getElementById('startDate').value = ''; 
+    document.getElementById('endDate').value = '';
     document.getElementById('filterType').value = 'all';
 
     updateTransactionList(transactions); 
