@@ -40,6 +40,11 @@
         </section>
         <section id="transaction-summary-container">
             <h2>Transaction Summary</h2>
+            <select id="filterType" onchange="filterTransactions()">
+                <option value="all">All</option>
+                <option value="income">Incomes</option>
+                <option value="expense">Expenses</option>
+            </select>
             <div id="transaction-container">
                 <ul id="transactionsList"></ul> <!-- for transactions -->
             </div>

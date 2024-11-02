@@ -20,20 +20,17 @@ function addTransaction(event) {
     }
 
     const transaction = { description, amount, date, type };
- 
     console.log(transaction)
     transactions.push(transaction);
-
     form.reset();
-
-    updateTransactionList();
+    updateTransactionList(transactions);
 }
 
-function updateTransactionList() {
+function updateTransactionList(transactionsDisplay) {
     transactionsList.innerHTML = ''; 
     let total = 0;
 
-    transactions.forEach((transaction, index) => { //getiing the index
+    transactionsDisplay.forEach((transaction, index) => { //getiing the index
         const li = document.createElement('li');
         li.setAttribute('data-type', transaction.type);
         li.textContent = `${transaction.description} - ${transaction.type} $${transaction.amount} on ${transaction.date}`;
@@ -74,7 +71,7 @@ function editTransaction(index){
 
 function deleteTransaction(index) {
     transactions.splice(index, 1); 
-    updateTransactionList(); 
+    updateTransactionList(transactions); 
 }
 
 form.addEventListener('submit', (event) => {
@@ -88,12 +85,25 @@ form.addEventListener('submit', (event) => {
             date: document.getElementById('date').value,
             type: document.getElementById('type').value
         };
+        delete form.dataset.editIndex; 
         form.reset();
     } else {
         addTransaction(event);
     }
 
-    updateTransactionList();
+    updateTransactionList(transactions);
 });
+
+document.getElementById('filterType').addEventListener('change', filterTransactions);
+
+function filterTransactions() {
+    const filterType = document.getElementById('filterType').value;
+
+    const filteredTransactions = transactions.filter(transaction =>  //creates new arr that include the filtered transactions
+        filterType === 'all' || transaction.type === filterType
+    );
+
+    updateTransactionList(filteredTransactions); 
+}
 
 totalAmount.textContent = `Total Amount: $0.00`; 
