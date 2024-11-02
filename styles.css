@@ -69,6 +69,19 @@ button:hover {
     background-color: #3498db;
 }
 
+li {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+li[data-type='income'] {
+    color: green;
+}
+
+li[data-type='expense'] {
+    color: red;
+}
+
 
 @media (max-width: 600px) {
     main {

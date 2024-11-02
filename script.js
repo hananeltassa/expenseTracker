@@ -36,6 +36,7 @@ function updateTransactionList() {
 
     transactions.forEach(transaction => {
         const li = document.createElement('li');
+        li.setAttribute('data-type', transaction.type);
         li.textContent = `${transaction.description} - ${transaction.type} $${transaction.amount} on ${transaction.date}`;
         transactionsList.appendChild(li);
 
