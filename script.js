@@ -5,6 +5,14 @@ const totalAmount = document.getElementById('total-amount');
 
 let transactions = [];
 
+// Load transactions from localStorage on page load 
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTransactions = localStorage.getItem('transactions');
+    if (savedTransactions) {
+        transactions = JSON.parse(savedTransactions);
+        updateTransactionList(transactions);
+    }
+});
 
 function addTransaction(event) {
     event.preventDefault(); 
@@ -56,6 +64,9 @@ function updateTransactionList(transactionsDisplay) {
     });
     
     totalAmount.textContent = `Total Amount: $${total.toFixed(2)}`; 
+
+    // Save transactions to localStorage
+    localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
 function editTransaction(index){
