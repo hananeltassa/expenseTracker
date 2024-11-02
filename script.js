@@ -1,8 +1,11 @@
 const form = document.getElementById('form');
 const transactionsList = document.getElementById('transactionsList'); 
+const totalAmount = document.getElementById('total-amount');
 
 
 let transactions = [];
+
+
 function addTransaction(event) {
     event.preventDefault(); 
 
@@ -10,6 +13,12 @@ function addTransaction(event) {
     const amount = parseFloat(document.getElementById('amount').value);
     const date = document.getElementById('date').value;
     const type = document.getElementById('type').value;
+
+    if (amount <= 0) {
+        alert("Please enter a valid positive amount.");
+        return;
+    }
+
 
     const transaction = { description, amount, date, type };
  
@@ -23,13 +32,18 @@ function addTransaction(event) {
 
 function updateTransactionList() {
     transactionsList.innerHTML = ''; 
+    let total = 0;
+
     transactions.forEach(transaction => {
         const li = document.createElement('li');
         li.textContent = `${transaction.description} - ${transaction.type} $${transaction.amount} on ${transaction.date}`;
         transactionsList.appendChild(li);
-    });
-}
 
+        total += (transaction.type === 'income' ? transaction.amount : -transaction.amount);
+    });
+    
+    totalAmount.textContent = `Total Amount: $${total.toFixed(2)}`; 
+}
 
 form.addEventListener('submit', addTransaction);
 
