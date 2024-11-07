@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    
+    <header>
+        <h1>Expense Tracker</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="add-transaction-container">
+                <h2>Add Transaction</h2>
+                <form id="form" method="POST" action="./scripts/php/add_transaction.php">
+                    <div class="form-gp">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" placeholder="Enter description" required>
+                    </div>
+                    <div class="form-gp">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                    </div>
+                    <div class="form-gp">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-gp">
+                        <label for="type">Transaction Type</label>
+                        <select id="type" name="type" required>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    <button type="submit">Add Transaction</button>
+                </form>
+            </section>
+            <section id="transaction-summary-container">
+                <h2>Transaction Summary</h2>
+                <div>
+                    <label for="descriptionFilter">Filter by Description</label>
+                    <input type="text" id="descriptionFilter" placeholder="Enter description" oninput="filterTransactions()">
+                </div>
+                <select id="filterType" onchange="filterTransactions()">
+                    <option value="all">All</option>
+                    <option value="income">Incomes</option>
+                    <option value="expense">Expenses</option>
+                </select>
+                <div>
+                    <label for="minAmount">Min Amount</label>
+                    <input type="number" id="minAmount" placeholder="Enter minimum amount" oninput="filterTransactions()">
+                    <label for="maxAmount">Max Amount</label>
+                    <input type="number" id="maxAmount" placeholder="Enter maximum amount" oninput="filterTransactions()">
+                </div>
+                <div>
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" oninput="filterTransactions()">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" oninput="filterTransactions()">
+                </div>
+                <button type="button" id="resetFilters" onclick="resetFilters()">Reset Filters</button>
+                <div id="transaction-container">
+                    <ul id="transactionsList"></ul> <!-- for transactions -->
+                </div>
+
+                <h2 id="total-amount">Total Amount: $</h2>
+            </section>
+
+        </div>
+    </main>
+</body>
+</html>

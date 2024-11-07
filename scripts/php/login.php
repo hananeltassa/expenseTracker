@@ -2,6 +2,8 @@
 
 require_once 'connection.php';
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -15,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
 
         if (password_verify($password, $user['password'])) {
-            header("Location: ../../index.html");
+            $_SESSION['user_id'] = $user['id'];
+            header("Location: ../../transaction.html");
             exit();
         } else {
             echo "Incorrect password!";
