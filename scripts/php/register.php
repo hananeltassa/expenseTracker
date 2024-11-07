@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query->bind_param("sss", $username, $email, $hash_pass); // prevent injection
 
     if ($query->execute()) {
-        header("Location: login.html"); 
+        header("Location: ../../login.html");
         exit();
     } else {
         echo "Error: " . $query->error; 

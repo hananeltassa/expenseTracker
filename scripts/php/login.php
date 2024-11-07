@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
 
         if (password_verify($password, $user['password'])) {
-            header("Location: index.html"); 
+            header("Location: ../../index.html");
             exit();
         } else {
             echo "Incorrect password!";

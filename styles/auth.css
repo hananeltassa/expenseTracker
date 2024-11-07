@@ -3,11 +3,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #bdc3c7;
-    align-items: center;
 }
 
 header {
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -55,7 +53,6 @@ select:focus {
     outline: none;
 }
 
-
 button {
     padding: 12px;
     background-color: #2980b9;
@@ -73,7 +70,6 @@ button:hover {
     background-color: #3498db;
 }
 
-
 p {
     text-align: center;
     margin-top: 10px;
@@ -88,7 +84,6 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
 
 @media (max-width: 600px) {
     body {
