@@ -1,10 +1,10 @@
 <?php
-include 'connection.php'; // Adjust the path if needed
+include 'connection.php'; 
 
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: loginpage.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -16,20 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['date'];
     $type = $_POST['type'];
 
-    // Prepare and bind the SQL statement
     $query = $connection->prepare("INSERT INTO transactions (description, amount, date, type, user_id) VALUES (?, ?, ?, ?, ?)");
-    $query->bind_param("ssssi", $description, $amount, $date, $type, $user_id);
+    $query->bind_param("sdssi", $description, $amount, $date, $type, $user_id);
 
-    // Execute the query
     if ($query->execute()) {
-        // Redirect back to the main page (or wherever you want)
-        header("Location: ../../transaction.html"); // Redirect to the page that displays transactions
-        exit(); // Ensure the script stops here
+        header("Location: ../../transaction.html"); 
+        exit(); 
     } else {
         echo "Error: " . $query->error;
     }
 
-    // Close the query
     $query->close();
 }
 ?>

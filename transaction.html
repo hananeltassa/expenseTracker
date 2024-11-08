@@ -39,38 +39,46 @@
                     <button type="submit">Add Transaction</button>
                 </form>
             </section>
-            <section id="transaction-summary-container">
-                <h2>Transaction Summary</h2>
-                <div>
-                    <label for="descriptionFilter">Filter by Description</label>
-                    <input type="text" id="descriptionFilter" placeholder="Enter description" oninput="filterTransactions()">
-                </div>
-                <select id="filterType" onchange="filterTransactions()">
-                    <option value="all">All</option>
-                    <option value="income">Incomes</option>
-                    <option value="expense">Expenses</option>
-                </select>
-                <div>
-                    <label for="minAmount">Min Amount</label>
-                    <input type="number" id="minAmount" placeholder="Enter minimum amount" oninput="filterTransactions()">
-                    <label for="maxAmount">Max Amount</label>
-                    <input type="number" id="maxAmount" placeholder="Enter maximum amount" oninput="filterTransactions()">
-                </div>
-                <div>
-                    <label for="startDate">Start Date</label>
-                    <input type="date" id="startDate" oninput="filterTransactions()">
-                    <label for="endDate">End Date</label>
-                    <input type="date" id="endDate" oninput="filterTransactions()">
-                </div>
-                <button type="button" id="resetFilters" onclick="resetFilters()">Reset Filters</button>
-                <div id="transaction-container">
-                    <ul id="transactionsList"></ul> <!-- for transactions -->
-                </div>
 
-                <h2 id="total-amount">Total Amount: $</h2>
+            <section class="filter-container">
+                <h2>Filter Transactions</h2>
+                <form method="GET" action="./scripts/php/filter_transaction.php">
+                    <div class="form-gp">
+                        <label for="type">Type:</label>
+                        <select name="type">
+                            <option value="">All</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-gp">
+                        <label for="min_amount">Min Amount:</label>
+                        <input type="number" name="min_amount" step="0.01" placeholder="Min amount">
+                    </div>
+                    
+                    <div class="form-gp">
+                        <label for="max_amount">Max Amount:</label>
+                        <input type="number" name="max_amount" step="0.01" placeholder="Max amount">
+                    </div>
+                    
+                    <div class="form-gp">
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" name="start_date">
+                    </div>
+                    
+                    <div class="form-gp">
+                        <label for="end_date">End Date:</label>
+                        <input type="date" name="end_date">
+                    </div>
+                    
+                    <div class="form-gp">
+                        <button type="submit">Apply Filter</button>
+                    </div>
+                </form>
             </section>
-
         </div>
     </main>
+
 </body>
 </html>
