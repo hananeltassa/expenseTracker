@@ -28,11 +28,12 @@ The Expense Tracker is a simple web application that allows users to track their
    - This method works with basic HTML and JavaScript for a more interactive user experience.
 
 ### Method 2: Backend (transaction.php)
-1. **transaction.php**: Handles server-side operations.
+1.**transaction.html**: Contains the basic structure of the web page and forms for adding transactions and filtering them.
+2. **transaction.php**: Handles server-side operations.
    - The PHP script interacts with the MySQL database to fetch transaction data.
    - It also processes filters like type, amount, and date range.
    - This method handles the actual data retrieval and manipulation based on the user's input and returns the results dynamically.
-2. **PHP Session**: Keeps track of the logged-in user and their transactions.
+3. **PHP Session**: Keeps track of the logged-in user and their transactions.
    - Only authenticated users can access and manipulate their transactions.
    - The PHP script verifies if the user is logged in before performing actions.
 
